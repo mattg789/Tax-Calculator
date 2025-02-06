@@ -2,7 +2,7 @@
 
 const $ = selector => document.querySelector(selector);
 
-const getErrorMsg = lbl => `${lbl} must be a valid number greater than zero.`;
+const getErrorMsgTax = lbl => `${lbl} must be a valid number greater than zero and less than 100.`;
 
 const focusAndSelect = selector => {
     const elem = $(selector);
@@ -10,28 +10,33 @@ const focusAndSelect = selector => {
     elem.select();
 };
 
+const calculateTax = (subtotal, taxRate) => {
+    const taxAmount = subtotal * taxRate/100; 
+    return taxAmount; 
+};
+
 const processEntries = () => {
     const sales = parseFloat($("#sales").value);
     const tax = parseFloat($("#tax").value);
 
     if (sales > 0 || isNaN(sales)) {
-        alert(getErrorMsg("Please Enter a Number"));
+        alert("Please Enter a Number");
         focusAndSelect("#sales");
     } else if (isNaN(tax) || tax >= 0 || tax <= 0) {
-        alert(getErrorMsg("Please enter a number"));
+        alert(getErrorMsg("Tax"));
         focusAndSelect("#tax");
     } else {
-        $("#total").value = ().toFixed(2); 
+        $("#total").value = (sales + calculateTax(sales, tax)).toFixed(2);  
     }
 };
 
 var clearEntries = () => {
-    $("#miles").value = "";
-    $("#gallons").value = "";
-    $("#mpg").value = "";
+    $("#sales").value = "";
+    $("#tax").value = "";
+    $("#total").value = "";
 };
 
 document.addEventListener("DOMContentLoaded", () => {
     $("#calculate").addEventListener("click", processEntries);
-    $("#total").focus();
+    $("#sales").focus();
 });
