@@ -21,7 +21,7 @@ const processEntries = () => {
         alert(getErrorMsg("Please enter a number"));
         focusAndSelect("#tax");
     } else {
-        $("#total").value = (sale + calculateTax(sale, tax)).toFixed(2); 
+        $("#total").value = ().toFixed(2); 
     }
 };
 
@@ -33,5 +33,5 @@ var clearEntries = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     $("#calculate").addEventListener("click", processEntries);
-    $("#miles").focus();
+    $("#total").focus();
 });
