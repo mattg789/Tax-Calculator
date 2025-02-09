@@ -19,10 +19,10 @@ const processEntries = () => {
     const sales = parseFloat($("#sales").value);
     const tax = parseFloat($("#tax").value);
 
-    if (sales > 0 || isNaN(sales)) {
-        alert("Please Enter a Number");
-        focusAndSelect("#sales");
-    } else if (isNaN(tax) || tax >= 0 || tax <= 0) {
+    if (isNaN(sales) || sales <= 0) {
+    alert("Please enter a valid number greater than zero for Sales Amount.");
+    focusAndSelect("#sales");
+} else if (isNaN(tax) || tax <= 0 || tax >= 100) {
         alert(getErrorMsg("Tax"));
         focusAndSelect("#tax");
     } else {
